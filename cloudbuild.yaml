@@ -1,0 +1,17 @@
+# Cloud Run Build YAML
+steps:
+  # First build the image with docker build
+  - name: gcr.io/cloud-builders/docker
+    args:
+      [
+        'build',
+        '-t',
+        'us-west2-docker.pkg.dev/$PROJECT_ID/securityscan/securityscanner',
+        '.',
+      ]
+
+  # Second, push the image to private registry with docker push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-west2-docker.pkg.dev/$PROJECT_ID/securityscan/securityscanner']
+
+ 
